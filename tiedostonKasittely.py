@@ -1,8 +1,6 @@
 import json
 from json.decoder import JSONDecodeError
 import random
-import hirsipuu
-import kayttoliittyma
 
 #poistaa tiedostosta rivinvaihdot, hakee random sanan 'sanat.txt' tiedostosta
 def haeSana():
@@ -17,8 +15,6 @@ def tallennaPeli(vastaus, yritykset, arvaukset):
     tallennusSanakirja = {"vastaus" : vastaus, "yritykset" : yritykset, "arvaukset" : arvaukset}
     json.dump(tallennusSanakirja, tiedosto, ensure_ascii=False)
     tiedosto.close()
-    print("Pelisi on nyt tallennettu! Palataan alkunäyttöön")
-    kayttoliittyma.GUI()
 
 #ladataan peli 'tallennus' tiedostosta
 def lataaTallennettuPeli(vastaus, yritykset, arvaukset):
