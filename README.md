@@ -1,5 +1,5 @@
 # hangman
-Kurssin "TKO_2111 Ohjelmoinnin harjoitustyö" ohjelmointiprojekti(https://opas.peppi.utu.fi/fi/opintojakso/TKO_2111/20409) <br/>
+Kurssin "TKO_2111 Ohjelmoinnin harjoitustyö" ohjelmointiprojekti (https://opas.peppi.utu.fi/fi/opintojakso/TKO_2111/20409) <br/>
 
 
 mkdir hangman <br/>
