@@ -4,42 +4,42 @@ import tiedostonKasittely
 def pelinTilanne(yritykset):
     match yritykset:
         case 5:
-             print("---|---- \n"
-                    "---|---- \n"
-                    "---|---- \n"
-                    "--===--- \n"
-                    "--|-|--- \n")
+            print("---|----")
+            print("---|----")
+            print("---|----")
+            print("--===---")
+            print("--|-|---")
         case 4:
-             print("---|––|- \n"
-                    "---|---- \n"
-                    "---|---- \n"
-                    "--===--- \n"
-                    "--|-|--- \n")
+            print("---|––|-")
+            print("---|----")
+            print("---|----")
+            print("--===---")
+            print("--|-|---")
         case 3:
-             print("---|––|- \n"
-                    "---|--O- \n"
-                    "---|---- \n"
-                    "--===--- \n"
-                    "--|-|--- \n")
+            print("---|––|-")
+            print("---|--O-")
+            print("---|----")
+            print("--===---")
+            print("--|-|---")
         case 2:
-             print("---|––|- \n"
-                    "---|--O- \n"
-                    "---|--|- \n"
-                    "--===--- \n"
-                    "--|-|--- \n")
+            print("---|––|-")
+            print("---|--O-")
+            print("---|--|-")
+            print("--===---")
+            print("--|-|---")
         case 1:
-             print("---|––|- \n"
-                    "---|--O- \n"
-                    "---|-/|\ \n"
-                    "--===--- \n"
-                    "--|-|--- \n")
+            print("---|––|-")
+            print("---|--O-")
+            print("---|-/|\\")
+            print("--===---")
+            print("--|-|---")
         case 0:
-             print("---|––|- \n"
-                    "---|--|- \n"
-                    "---|--O- \n"
-                    "---|-/|\ \n"
-                    "--===/-\ \n"
-                    "--|-|--- \n")
+            print("---|––|-")
+            print("---|--|-")
+            print("---|--O-")
+            print("---|-/|\\")
+            print("--===/-\\")
+            print("--|-|---")
 
 
 #uusi tai tiedostosta
@@ -52,31 +52,38 @@ def peliMuoto(pelinMuoto):
         pass
 
     if pelinMuoto == "tallennettu":
-        vastaus, yritykset, arvaukset= tiedostonKasittely.lataaTallennettuPeli(vastaus, yritykset, arvaukset)
+        vastaus, yritykset, arvaukset = tiedostonKasittely.lataaTallennettuPeli(vastaus, yritykset, arvaukset)
 
     peli(vastaus, yritykset, arvaukset)
 
+
 def GUI():
-    print("---------" '\n' "HIRSIPUU" '\n' "---------" '\n' "Tervetuloa pelaamaan. Arvauksen on oltava yksi kirjain väliltä a-ä tai 'tallenna peli',"
-    "jolloin peli tallennetaan tiedostoon. Valitse pelimuoto:"'\n' "0 - jos haluat sulkea pelin" '\n' "1 - jos haluat pelata uuden pelin" '\n' 
-    "2 - jos haluat pelata tallennetun pelin")
-    pelimuoto = int(input())
+    print("---------")
+    print("HIRSIPUU")
+    print("---------")
+    print("Tervetuloa pelaamaan. Arvauksen on oltava yksi kirjain väliltä a-ä tai 'tallenna peli',"
+          "jolloin peli tallennetaan tiedostoon. Valitse pelimuoto:")
+    print("0 - jos haluat sulkea pelin")
+    print("1 - jos haluat pelata uuden pelin")
+    print("2 - jos haluat pelata tallennetun pelin")
+    pelimuoto = input()
+
     match pelimuoto:
-        case 0:
+        case "0":
             exit()
-        case 1:
+        case "1":
             peliMuoto("uusi")
-        case 2:
+        case "2":
             peliMuoto("tallennettu")
 
 
 #kutsutaan pelin jälkeen
 def pelataankoUusiksi(lopputulos, vastaus):
     if lopputulos == "voitto":
-        uusiksi = input((f"VOITIT PELIN, vastaus oli {vastaus}. Haluatko pelata uusiksi? K/E "))
+        uusiksi = input(f"VOITIT PELIN, vastaus oli {vastaus}. Haluatko pelata uusiksi? K/E ")
     if lopputulos == "häviö":
-        uusiksi = input((f"HÄVISIT PELIN, vastaus oli {vastaus}. Haluatko pelata uusiksi? K/E "))
-    
+        uusiksi = input(f"HÄVISIT PELIN, vastaus oli {vastaus}. Haluatko pelata uusiksi? K/E ")
+
     if uusiksi.lower() == "k":
         peliMuoto("uusi")
     else:
@@ -87,18 +94,17 @@ def pelataankoUusiksi(lopputulos, vastaus):
 #hirsipuu
 def peli(vastaus, yritykset, arvaukset):
     while True:
-        sallitutInputit = ("abcdefghijklmnopqrstuvwxyzåäö")
-        printattavaSana = (' ' .join(arvaus if arvaus in arvaukset else '_' for arvaus in vastaus))
+        sallitutInputit = "abcdefghijklmnopqrstuvwxyzåäö"
+        printattavaSana = ''.join(arvaus if arvaus in arvaukset else '_' for arvaus in vastaus)
         if '_' not in printattavaSana:
             pelataankoUusiksi("voitto", vastaus)
             break
-        else: 
-            print (printattavaSana)
-        
+        else:
+            print(printattavaSana)
+
         #testaa onhan arvaus validi TAI pelintallennus
         while True:
-            arvaus = (input("Arvaa kirjainta: "))
-            arvaus = arvaus.lower()
+            arvaus = input("Arvaa kirjainta: ").lower()
             if arvaus == "tallenna peli":
                 tiedostonKasittely.tallennaPeli(vastaus, yritykset, arvaukset)
                 print("Pelisi on tallennettu. Palataan alkunäyttöön.")
@@ -107,7 +113,7 @@ def peli(vastaus, yritykset, arvaukset):
                 break
             else:
                 print("Arvaus ei kelvollinen. Arvauksen pitää olla yksi kirjain (a-ä).")
-        
+
         if arvaus in arvaukset:
             print("Arvasit tämän jo! Arvaa jotain muuta")
 
@@ -115,7 +121,7 @@ def peli(vastaus, yritykset, arvaukset):
             arvaukset.append(arvaus)
 
         if arvaus not in vastaus and arvaus not in arvaukset:
-            yritykset = yritykset-1
+            yritykset -= 1
             pelinTilanne(yritykset)
 
             if yritykset == 0:
@@ -124,7 +130,6 @@ def peli(vastaus, yritykset, arvaukset):
             else:
                 arvaukset.append(arvaus)
                 print(f"Yrityksiä jäljellä {yritykset}, arvatut kirjaimet {arvaukset}")
-
 
 
 GUI()
